@@ -1,0 +1,11 @@
+<resources>
+    <string name="app_name">MyCal</string>
+    <string-array name="account_type">
+        <item>Select your type</item>
+        <item>Saving</item>
+        <item>Loan</item>
+    </string-array>
+
+    <!-- TODO: Remove or change this placeholder text -->
+    <string name="hello_blank_fragment">Hello blank fragment</string>
+</resources>
