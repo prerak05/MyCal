@@ -1,6 +1,5 @@
 package com.prerak.view.fragment;
 
-
 import android.arch.persistence.room.Room;
 import android.databinding.DataBindingUtil;
 import android.os.Bundle;
@@ -18,27 +17,25 @@ import com.prerak.database.table.TotalSum;
 import com.prerak.database.table.UserData;
 import com.prerak.databinding.FragmentSavingBinding;
 import com.prerak.view.adapter.SavingAdapter;
+import com.prerak.view.adapter.SavingByMonthAdapter;
 
 import java.util.ArrayList;
 import java.util.List;
 
 /**
- * A simple {@link Fragment} subclass.
+ * Created by prerak on 3/29/2019.
  */
-public class SavingFragmentFragment extends Fragment {
+
+public class SavingByMonthFragment extends Fragment{
     private DB appDatabase;
     private CURDOperation curdOperation;
     private FragmentSavingBinding mBinding;
     private List<UserData> userDataList = new ArrayList<>();
-    private UserData userData;
-    private SavingAdapter mAdapter;
     private TotalSum totalSum;
+    private SavingByMonthAdapter mAdapter;
 
-
-    public SavingFragmentFragment() {
-        // Required empty public constructor
+    public SavingByMonthFragment() {
     }
-
 
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container,
@@ -60,13 +57,13 @@ public class SavingFragmentFragment extends Fragment {
         } else {
             mBinding.tcNoRecord.setVisibility(View.VISIBLE);
         }
-        totalSum = curdOperation.getTotalAmount("Saving","04");
+        totalSum = curdOperation.getTotalAmount("Saving","03");
         System.out.println("total Amount is ==>" + totalSum.getTotalInterestedAmount());
         mBinding.tvTotalInterest.setText("Total Saving amount with interest is " + "\u20B9" + totalSum.getTotalInterestedAmount());
     }
 
     private void setupRecyclerview() {
-        mAdapter = new SavingAdapter(getActivity(), userDataList);
+        mAdapter = new SavingByMonthAdapter(getActivity(), userDataList);
         mBinding.recyclerView.setHasFixedSize(true);
         mBinding.recyclerView.setLayoutManager(new LinearLayoutManager(getContext()));
         mBinding.recyclerView.setAdapter(mAdapter);
@@ -81,5 +78,6 @@ public class SavingFragmentFragment extends Fragment {
                 init();
             }
         });
+
     }
 }

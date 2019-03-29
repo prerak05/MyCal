@@ -72,13 +72,13 @@ public class LoanFragment extends Fragment {
     }
 
     private void init() {
-        userDataList = curdOperation.getDataByPaymentType("Loan");
+        userDataList = curdOperation.getDataByPaymentType("Loan","03");
         if (userDataList != null && userDataList.size() > 0) {
             setupRecyclerview();
         } else {
             mBinding.tcNoRecord.setVisibility(View.VISIBLE);
         }
-        totalSum = curdOperation.getTotalAmount("Loan");
+        totalSum = curdOperation.getTotalAmount("Loan","03");
         System.out.println("total Amount is ==>" + totalSum.getTotalInterestedAmount());
         mBinding.tvTotalInterest.setText("Total Saving amount with interest is " + "\u20B9" + totalSum.getTotalInterestedAmount());
     }

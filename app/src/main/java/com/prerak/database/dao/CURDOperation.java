@@ -38,9 +38,9 @@ public class CURDOperation {
         return userDataList;
     }
 
-    public List<UserData> getDataByPaymentType(String paymentType) {
+    public List<UserData> getDataByPaymentType(String paymentType,String month) {
         List<UserData> userDataList = new ArrayList<>();
-        userDataList = appDatabase.getDao().getDataByPaymentType(paymentType);
+        userDataList = appDatabase.getDao().getDataByPaymentType(paymentType,month);
         return userDataList;
     }
 
@@ -61,9 +61,9 @@ public class CURDOperation {
         return totalSum;
     }
 
-    public TotalSum getTotalAmount(String paymentOption) {
+    public TotalSum getTotalAmount(String paymentOption,String month) {
         TotalSum totalSum = new TotalSum();
-        totalSum = appDatabase.getDao().getTotalAmount(paymentOption);
+        totalSum = appDatabase.getDao().getTotalAmount(paymentOption,month);
         if (appDatabase.isOpen()) {
             Log.e(TAG, "isOpen");
         } else if (appDatabase.inTransaction()) {

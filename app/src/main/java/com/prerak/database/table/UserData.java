@@ -3,6 +3,9 @@ package com.prerak.database.table;
 import android.arch.persistence.room.ColumnInfo;
 import android.arch.persistence.room.Entity;
 import android.arch.persistence.room.PrimaryKey;
+import android.arch.persistence.room.TypeConverters;
+
+import java.util.Date;
 
 /**
  * Created by prerak on 22/1/19.
@@ -26,11 +29,13 @@ public class UserData {
     @ColumnInfo(name = "interest_amount")
     private String interestAmount;
 
+    private String mm;
+
     public UserData() {
     }
 
     public UserData(String dateTime, String paymentType, String amount, String interestAmount) {
-        DateTime = dateTime;
+        this.DateTime = dateTime;
         this.paymentType = paymentType;
         this.amount = amount;
         this.interestAmount = interestAmount;
@@ -95,5 +100,13 @@ public class UserData {
 
     public void setInterestAmount(String interestAmount) {
         this.interestAmount = interestAmount;
+    }
+
+    public String getMm() {
+        return mm;
+    }
+
+    public void setMm(String mm) {
+        this.mm = mm;
     }
 }

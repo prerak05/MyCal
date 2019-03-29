@@ -23,7 +23,7 @@ import java.util.List;
 
 public class MainActivity extends AppCompatActivity {
     private ActivityMainBinding binding;
-    private String strType, strAmount, strDate;
+    private String strType, strAmount, strDate, strInterest;
     private DB appDatabase;
     private CURDOperation curdOperation;
 
@@ -41,15 +41,10 @@ public class MainActivity extends AppCompatActivity {
         binding.etDate.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                AppUtil.getInstance(MainActivity.this).chooseDate(binding.etDate, new BaseDate() {
+                AppUtil.getInstance(MainActivity.this).chooseDateWithoutPreviousRestriction(binding.etDate, new BaseDate() {
                     @Override
                     public void onDateSelect(final String date, EditText editText) {
-                        AppUtil.getInstance(MainActivity.this).chooseTime(binding.etDate, new BaseTime() {
-                            @Override
-                            public void onTimeSelected(String time, EditText editText) {
-                                editText.setText(date + " " + time);
-                            }
-                        });
+                        editText.setText(date);
                     }
                 });
             }
@@ -72,27 +67,38 @@ public class MainActivity extends AppCompatActivity {
             public void onClick(View v) {
                 strAmount = binding.etAmount.getText().toString();
                 strDate = binding.etDate.getText().toString();
+                strInterest = binding.etInterest.getText().toString();
+
                 if (strDate == null || strDate.equals("")) {
                     Toast.makeText(MainActivity.this, "Choose your date", Toast.LENGTH_SHORT).show();
                     return;
                 } else if (strType == null || strType.equals("Select your type")) {
                     Toast.makeText(MainActivity.this, "Select your type", Toast.LENGTH_SHORT).show();
                     return;
+                } else if (strInterest == null || strInterest.equals("")) {
+                    Toast.makeText(MainActivity.this, "Enter Interest", Toast.LENGTH_SHORT).show();
+                    return;
                 } else if (strAmount == null || strAmount.equals("")) {
                     Toast.makeText(MainActivity.this, "Enter Amount", Toast.LENGTH_SHORT).show();
                     return;
-                }if (strAmount!= null && strAmount.length() <= 2){
+                }
+                if (strAmount != null && strAmount.length() <= 2) {
                     Toast.makeText(MainActivity.this, "Enter 3 Digit Amount", Toast.LENGTH_SHORT).show();
                     return;
-                }else {
+                } else {
+                    curdOperation.insertData(new UserData(binding.etDate.getText().toString(), strType, strAmount, strInterest));
+
+/*
                     if (strType != null && strType.equals("Saving")){
                         curdOperation.insertData(new UserData(binding.etDate.getText().toString(), strType, strAmount,"10"));
                     }else if (strType != null && strType.equals("Loan")){
                         curdOperation.insertData(new UserData(binding.etDate.getText().toString(), strType, strAmount,"12"));
                     }
+*/
                     binding.etDate.setText("");
                     binding.etAmount.setText("");
                     binding.spnType.setSelection(0);
+                    binding.etInterest.setText("");
                     Toast.makeText(MainActivity.this, "Record inserted successfully", Toast.LENGTH_SHORT).show();
                 }
             }

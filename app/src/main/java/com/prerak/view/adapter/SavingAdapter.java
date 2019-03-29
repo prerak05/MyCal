@@ -46,6 +46,7 @@ public class SavingAdapter extends RecyclerView.Adapter<SavingAdapter.ViewHolder
         if (userDataList != null && userDataList.size() > 0) {
             holder.mBinding.tvAmount.setText("\u20B9" + userDataList.get(position).getAmount());
             holder.mBinding.tvDate.setText(userDataList.get(position).getDateTime());
+            holder.mBinding.tvDate.setText(userDataList.get(position).getMm());
             totalSum = curdOperation.getTotalSum(userDataList.get(position).getId());
             holder.mBinding.tvInterest.setText("Amount with interest is : " + "\u20B9" + totalSum.getTotalAmount());
         }

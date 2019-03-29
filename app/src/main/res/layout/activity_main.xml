@@ -7,10 +7,22 @@
     <android.support.constraint.ConstraintLayout
         android:layout_width="match_parent"
         android:layout_height="match_parent"
-        android:layout_margin="10dp"
         android:focusable="false"
         android:focusableInTouchMode="true"
-        android:padding="10dp">
+        >
+
+        <include layout="@layout/toolbar"
+            android:id="@+id/mainToolbar"
+            />
+
+        <android.support.constraint.ConstraintLayout
+            android:layout_width="0dp"
+            android:layout_height="match_parent"
+            android:layout_marginTop="?attr/actionBarSize"
+            android:padding="@dimen/_10sdp"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintTop_toBottomOf="@+id/mainToolbar">
 
         <EditText
             android:id="@+id/etDate"
@@ -36,6 +48,19 @@
             app:layout_constraintTop_toBottomOf="@+id/etDate" />
 
         <EditText
+            android:id="@+id/etInterest"
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            android:hint="Enter interest"
+            android:digits="0123456789"
+            android:maxLength="2"
+            android:imeOptions="actionNext"
+            android:inputType="numberDecimal"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toBottomOf="@+id/spnType" />
+
+        <EditText
             android:id="@+id/etAmount"
             android:layout_width="0dp"
             android:layout_height="wrap_content"
@@ -45,7 +70,7 @@
             android:inputType="numberDecimal"
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintTop_toBottomOf="@+id/spnType" />
+            app:layout_constraintTop_toBottomOf="@+id/etInterest" />
 
         <Button
             android:id="@+id/btnSubmit"
@@ -68,6 +93,7 @@
             app:layout_constraintBottom_toBottomOf="parent"
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintStart_toStartOf="parent" />
+        </android.support.constraint.ConstraintLayout>
     </android.support.constraint.ConstraintLayout>
 
 </layout>
