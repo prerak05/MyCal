@@ -5,6 +5,7 @@ import android.databinding.DataBindingUtil;
 import android.os.Bundle;
 import android.support.design.widget.TabLayout;
 import android.support.v7.app.AppCompatActivity;
+import android.widget.Spinner;
 
 import com.prerak.R;
 import com.prerak.database.dao.CURDOperation;
@@ -17,6 +18,7 @@ public class ViewAllRecordActivity extends AppCompatActivity {
     private DB appDatabase;
     private CURDOperation curdOperation;
     private ViewAllRecordAdapter mAdapter;
+    public static Spinner spMonth;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -25,6 +27,7 @@ public class ViewAllRecordActivity extends AppCompatActivity {
         appDatabase = Room.databaseBuilder(this, DB.class, DB.DB_NAME)
                 .allowMainThreadQueries().build();
         curdOperation = new CURDOperation(this);
+        spMonth = findViewById(R.id.spMonth);
         if (mBinding.tab.getTabCount() != 2) {
             mBinding.tab.addTab(mBinding.tab.newTab().setText("Saving"));
             mBinding.tab.addTab(mBinding.tab.newTab().setText("Loan"));
